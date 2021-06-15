@@ -43,9 +43,7 @@ db.collection('col-sala')
   .doc('azlo')
   .collection('col-usuarios')
   .onSnapshot((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      console.log(doc.data());
-    });
+    querySnapshot.forEach((doc) => {});
   });
 
 db.collection('col-sala')
@@ -59,6 +57,8 @@ db.collection('col-sala')
     let cont = 0;
 
     querySnapshot.forEach((doc) => {
+      console.log(doc.data());
+
       if (cont === 0) {
         pages.innerHTML += ` <li class="nav-item" role="presentation">
                   <a
@@ -139,17 +139,29 @@ db.collection('col-sala')
           `;
       }
 
-      cont++;
       const item = document.querySelector(
         `#${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}2`
       );
 
-      doc.data().arrPages.pagesArr.avisos.map((data, i) => {
-        item.innerHTML += `<div class="col-lg-4 col-md-4 col-12 pr-1 mt-3">
+      doc
+        .data()
+        .arrPages.pagesArr.avisos.reverse()
+        .map((data, i) => {
+          item.innerHTML += `<div class="col-auto pr-1 mt-3">
                       <div class="destination-card">
-                      <i class="far fa-trash-alt delete pointer" onclick="deleteAviso(${i},'${
-          doc.data().arrPages.pagesArr.pagina
-        }')"></i>
+                      <div class="dropdown">
+                      <i class="fas fa-ellipsis-v delete pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
+
+  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+  <a class="dropdown-item pointer"  onclick="mostrarDatosComment('${
+    doc.data().arrPages.pagesArr.pagina
+  }',${i})">Escribir comentario <i class="far fa-comment-dots float-right mt-1"></i></a>
+  <a class="dropdown-item" href="#">Marcar compleatado <i class="far fa-check-circle float-right mt-1"></i></a>
+  <a class="dropdown-item pointer" onclick="deleteAviso(${i},'${
+            doc.data().arrPages.pagesArr.pagina
+          }')">Eliminar aviso <i class="far fa-trash-alt float-right mt-1"></i> </a>
+  </div>
+</div>
                         <div class="destination-profile">
                           <img
                             class="profile-img"
@@ -164,9 +176,36 @@ db.collection('col-sala')
                           <div class="point">${data.nombre}</div>
                           <div class="sub-point">${data.aviso}</div>
                         </div>
+                        <hr/>
+                        <p clas="mt-3">Comentarios</p>
+                        <div id='comment${i + 80}${doc
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}'>
+                          
+                          </div>
                       </div>
                       </div>`;
-      });
+          const commentContent = document.querySelector(
+            `#comment${i + 80}${doc
+              .data()
+              .arrPages.pagesArr.pagina.replace(' ', '')}`
+          );
+
+          commentContent.innerHTML = '';
+          const arrReverse = doc.data().arrPages.pagesArr.avisos.reverse()[i];
+
+          arrReverse.comentarios.map(({ comentario, foto, nombre }, i) => {
+            const separa = nombre.split(' ', 2);
+            const nombreUsuarioSinEspacio = separa[0] + ' ' + separa[1];
+            const nombreValidado = nombreUsuarioSinEspacio.replace(
+              'undefined',
+              ''
+            );
+            commentContent.innerHTML += `<div class="mt-4 mb-3"><img class="img__Comment" src="${foto}" alt="azlo" /><p class="float-right mt-2">${nombreValidado}</p></div><p class="comment">${comentario}</p><hr class="mt-5" />`;
+          });
+        });
+
+      cont++;
     });
   });
 
@@ -181,7 +220,6 @@ const deleteAviso = (i, page) => {
     .get()
     .then((doc) => {
       const arr = doc.data().arrPages.pagesArr.avisos;
-      console.log(arr, i);
       arr.splice(i, 1);
 
       const arrPages = {
@@ -369,7 +407,6 @@ db.collection('col-sala')
 
     // $('#list-filter').html('');
     querySnapshot.forEach((doc) => {
-      console.log();
       selectPages.innerHTML += `<option value='${
         doc.data().arrPages.pagesArr.pagina
       }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
@@ -389,7 +426,6 @@ db.collection('col-sala')
 
     // $('#list-filter').html('');
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
       listUsers.innerHTML += `
               <div class="credit-wrapper">
                 <img class="img__list" src="${doc.data().foto}" alt="azlo" />
@@ -452,11 +488,14 @@ const registrarAviso = () => {
               arrImage.push(photoURL);
               const arrHora = [];
               arrHora.push(hora);
+              const arrComent = [];
+
               arrAvisos.push({
                 aviso: arrAviso,
                 nombre: arrNombre,
                 imagen: arrImage,
                 hora: arrHora,
+                comentarios: arrComent,
               });
               const arrPages = {
                 pagesArr: {
@@ -551,6 +590,174 @@ const registrarAviso = () => {
         });
       } else {
         // doc.data() will be undefined in this case
+      }
+    })
+    .catch((error) => {
+      console.log('Error getting document:', error);
+    });
+};
+const mostrarDatosComment = (page, index) => {
+  document.querySelector('#pagecomentarioText').value = page;
+  document.querySelector('#idcomentarioText').value = index;
+  console.log(index);
+  $('#modalComentarios').modal('show');
+};
+// Registrar coemntarios
+const registrarComentario = () => {
+  const comentario = document.querySelector('#comentarioText').value;
+  const page = document.querySelector('#pagecomentarioText').value;
+  const id = document.querySelector('#idcomentarioText').value;
+
+  if (comentario === '') {
+    Swal.fire({
+      title: 'El comentario esta vacío',
+      icon: 'info',
+      html: 'El comentario no puede quedar vacío',
+      showCloseButton: true,
+      showCancelButton: false,
+      focusConfirm: false,
+      confirmButtonText: 'Aceptar',
+      cancelButtonAriaLabel: 'Thumbs down',
+    });
+    return false;
+  }
+
+  docPagesRef
+    .doc('pages' + page.replace(' ', '') + 'azlo')
+    .get()
+    .then((doc) => {
+      const arrAvisos = doc.data().arrPages.pagesArr.avisos;
+
+      if (doc.data().arrPages.pagesArr.avisos.comentarios) {
+        const arrAviso = doc.data().arrPages.pagesArr.avisos.reverse()[
+          id
+        ].aviso;
+        const arrNombre = doc.data().arrPages.pagesArr.avisos.reverse()[
+          id
+        ].nombre;
+        const arrImage = doc.data().arrPages.pagesArr.avisos.reverse()[
+          id
+        ].imagen;
+        const arrHora = doc.data().arrPages.pagesArr.avisos.reverse()[id].hora;
+        const arrComent = [];
+        arrComent.push(comentario);
+        const arrAvisos2 = {
+          aviso: arrAviso,
+          nombre: arrNombre,
+          imagen: arrImage,
+          hora: arrHora,
+          comentarios: arrComent,
+        };
+        arrAvisos.reverse().splice(id, 1, arrAvisos2);
+
+        const arrPages = {
+          pagesArr: {
+            pagina: page,
+            avisos: arrAvisos.reverse(),
+          },
+        };
+        return new Promise((resolve, reject) => {
+          docPagesRef
+            .doc('pages' + page + 'azlo')
+            .set({
+              arrPages,
+            })
+            .then(function (docRef) {
+              resolve(arrPages);
+
+              const Toast = Swal.mixin({
+                toast: true,
+                position: 'top-end',
+                showConfirmButton: false,
+                timer: 1500,
+                timerProgressBar: true,
+                didOpen: (toast) => {
+                  toast.addEventListener('mouseenter', Swal.stopTimer);
+                  toast.addEventListener('mouseleave', Swal.resumeTimer);
+                },
+              });
+              document.querySelector('#comentarioText').value = '';
+              Toast.fire({
+                icon: 'success',
+                title: 'Comentario registrado',
+              });
+            })
+            .catch(function (error) {
+              reject(error);
+            });
+        });
+      } else {
+        firebase.auth().onAuthStateChanged(function (user) {
+          const { displayName, photoURL } = user;
+          const arrAviso = doc.data().arrPages.pagesArr.avisos.reverse()[
+            id
+          ].aviso;
+          const arrNombre = doc.data().arrPages.pagesArr.avisos.reverse()[
+            id
+          ].nombre;
+          const arrImage = doc.data().arrPages.pagesArr.avisos.reverse()[
+            id
+          ].imagen;
+          const arrHora = doc.data().arrPages.pagesArr.avisos.reverse()[
+            id
+          ].hora;
+          const arrComent = doc.data().arrPages.pagesArr.avisos.reverse()[
+            id
+          ].comentarios;
+          console.log('c', arrComent);
+          arrComent.push({
+            comentario: comentario,
+            nombre: displayName,
+            foto: photoURL,
+          });
+          console.log('c2', arrAviso);
+
+          const arrAvisos2 = {
+            aviso: arrAviso,
+            nombre: arrNombre,
+            imagen: arrImage,
+            hora: arrHora,
+            comentarios: arrComent,
+          };
+          arrAvisos.reverse().splice(id, 1, arrAvisos2);
+          console.log(arrAvisos);
+          const arrPages = {
+            pagesArr: {
+              pagina: page,
+              avisos: arrAvisos.reverse(),
+            },
+          };
+          return new Promise((resolve, reject) => {
+            docPagesRef
+              .doc('pages' + page.replace(' ', '') + 'azlo')
+              .set({
+                arrPages,
+              })
+              .then(function (docRef) {
+                resolve(arrPages);
+
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                  },
+                });
+                document.querySelector('#comentarioText').value = '';
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Comentario registrado',
+                });
+              })
+              .catch(function (error) {
+                reject(error);
+              });
+          });
+        });
       }
     })
     .catch((error) => {

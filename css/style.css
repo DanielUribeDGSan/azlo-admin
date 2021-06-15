@@ -246,7 +246,7 @@ body {
 }
 .user-box .cards-header .cards-button svg,
 .user-box .cards-view .cards-button svg {
-  width: 16px;
+  width: 25px;
   margin: 0 2px 0 0;
 }
 .user-box .cards-header .date-wrapper,
@@ -372,6 +372,7 @@ body {
   padding: 20px;
   width: 100%;
   border-radius: 6px;
+  min-width: 200px;
 }
 .destination-card + .destination-card {
   margin-left: 20px;
@@ -416,7 +417,7 @@ body {
 }
 
 .sub-point {
-  font-size: 13px;
+  font-size: 15px;
   margin-top: 4px;
 }
 
@@ -805,7 +806,7 @@ body {
   padding: 0 10px 16px;
 }
 .table th:first-child {
-  padding-left: 36px;
+  padding-left: 0px;
 }
 .table td {
   font-size: 15px;
@@ -1019,6 +1020,49 @@ table td,
   width: 50px;
   margin-right: 20px;
   border-radius: 50pc;
+}
+.dropdown-menu.show {
+  display: block;
+  background: linear-gradient(45deg, #212752 0%, #1a1d3a 100%);
+  padding: 20px;
+  width: 100%;
+  border-radius: 6px;
+  min-width: 300px;
+  max-width: 300px;
+  border: 0px;
+}
+.dropdown-item {
+  display: block;
+  width: 100%;
+  padding: 0.25rem 1.5rem;
+  clear: both;
+  font-weight: 400;
+  color: #ffffff;
+  text-align: inherit;
+  white-space: nowrap;
+  background-color: transparent;
+  border: 0;
+}
+.dropdown-item:hover {
+  border-radius: 30px;
+}
+.img__Comment {
+  width: 46px;
+  height: 46px;
+  -o-object-fit: cover;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 2px;
+  border: 1px solid #bebec4;
+  flex-shrink: 0;
+}
+.comment {
+  width: 100%;
+  background: linear-gradient(45deg, #1a1d3a 0%, #212752 100%);
+  box-shadow: 0 6px 1px rgb(176 192 229 / 20%);
+  border-radius: 5px;
+  padding: 4px 13px;
+  margin: 5px 0px 14px 0px;
 }
 /* Utilidades */
 .pointer {
