@@ -197,6 +197,13 @@
             <div
               class="button offer-button pointer mt-3"
               data-toggle="modal"
+              data-target="#modalAvisosImage"
+            >
+              Registrar aviso con imagen
+            </div>
+            <div
+              class="button offer-button pointer mt-3"
+              data-toggle="modal"
               data-target="#modalPagesDelete"
             >
               Eliminar página
@@ -380,86 +387,35 @@
                 Lista de tareas
               </div>
               <div class="cards-header-date">
-                <div class="dropdown">
-                  <div
-                    class="cards-button button pointer"
-                    id="dropdownMenuButton2"
-                    data-toggle="dropdown"
-                    aria-haspopup="true"
-                    aria-expanded="false"
+                <div
+                  class="cards-button button pointer"
+                  data-toggle="modal"
+                  data-target="#modalAgregarTareas"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    class="feather feather-plus"
                   >
-                    <svg
-                      viewBox="0 0 24 24"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="2"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      class="feather feather-plus"
-                    >
-                      <path d="M12 5v14M5 12h14" />
-                    </svg>
-                    Create
-                  </div>
-
-                  <div
-                    class="dropdown-menu"
-                    aria-labelledby="dropdownMenuButton2"
-                  >
-                    <a class="dropdown-item pointer"
-                      >Asignar tarea
-                      <i class="fas fa-user-check float-right mt-1"></i
-                    ></a>
-                    <a class="dropdown-item" href="#"
-                      >Eliminar tarea
-                      <i class="fas fa-trash-alt float-right mt-1"></i
-                    ></a>
-                  </div>
+                    <path d="M12 5v14M5 12h14" />
+                  </svg>
+                  Create
                 </div>
               </div>
             </div>
             <div class="cards card">
-              <table class="table">
-                <thead>
-                  <tr>
-                    <th>Check</th>
-                    <th>Name</th>
-                    <th>Tarea</th>
-                    <th>Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>
-                      <input type="checkbox" id="row1" class="table-row" />
-                      <span class="time">17.00</span>
-                    </td>
-                    <td>John D</td>
-                    <td>Sudbury Station</td>
-                    <td>
-                      <div class="status is-wait">
-                        <svg
-                          xmlns="http://www.w3.org/2000/svg"
-                          width="24"
-                          height="24"
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          stroke="currentColor"
-                          stroke-width="2"
-                          stroke-linecap="round"
-                          stroke-linejoin="round"
-                          class="feather feather-loader"
-                        >
-                          <path
-                            d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"
-                          ></path>
-                        </svg>
-                        Waiting
-                      </div>
-                    </td>
-                  </tr>
-                </tbody>
-              </table>
+              <div id="tabContent2">
+                <ul
+                  class="nav nav-pills mb-3"
+                  id="pills-tab2"
+                  role="tablist"
+                ></ul>
+                <div class="tab-content" id="pills-tabContent2"></div>
+              </div>
             </div>
           </div>
         </div>
@@ -557,7 +513,7 @@
             <form>
               <div class="form-row align-items-center">
                 <div class="col-sm-12 my-1">
-                  <label class="sr-only" for="namePage"
+                  <label class="sr-only" for="pagesAvisos2"
                     >Nombre de la página</label
                   >
                   <div class="input-group">
@@ -578,6 +534,90 @@
                   >
                     Eliminar
                   </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div
+      class="modal fade"
+      id="modalAvisosImage"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="modalAvisosImageLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAvisosImageLabel">
+              Registrar avisos
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row align-items-center">
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="avisoText2"
+                    >Nombre de la página</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="far fa-file-alt"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="avisoText2"
+                      placeholder="Aviso"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="namePage"
+                    >Nombre de la página</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-pager"></i>
+                      </div>
+                    </div>
+                    <select class="form-control" id="pagesAvisosImage"></select>
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="namePage"
+                    >Nombre de la página</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-pager"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      class="form-control"
+                      id="imagenText"
+                      aria-describedby="fileHelp"
+                      onchange="return fileValidation()"
+                    />
+                  </div>
                 </div>
               </div>
             </form>
@@ -650,6 +690,101 @@
                   >
                     Registrar
                   </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div
+      class="modal fade"
+      id="modalComentariosImg"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="modalComentariosImgLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalComentariosImgLabel">
+              Realizar comentario
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row align-items-center">
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="comentarioTextImg"
+                    >Comentario</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="far fa-file-alt"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="comentarioTextImg"
+                      placeholder="Comentario"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="pagecomentarioTextImg"
+                    >Comentario</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="far fa-file-alt"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="pagecomentarioTextImg"
+                      placeholder="Comentario"
+                      readonly
+                    />
+                    <input
+                      type="hidden"
+                      class="form-control"
+                      id="idcomentarioTextImg"
+                      placeholder="Comentario"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="imagenText2">Comentario</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="far fa-file-alt"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      class="form-control"
+                      id="imagenText2"
+                      aria-describedby="fileHelp"
+                      onchange="return fileValidation2()"
+                    />
+                  </div>
                 </div>
               </div>
             </form>
@@ -740,6 +875,90 @@
         </div>
       </div>
     </div>
+    <div
+      class="modal fade"
+      id="modalAgregarTareas"
+      data-backdrop="static"
+      data-keyboard="false"
+      tabindex="-1"
+      aria-labelledby="modalAgregarTareasLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog modal-dialog-scrollable modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="modalAgregarTareasLabel">
+              Agregar tareas
+            </h5>
+            <button
+              type="button"
+              class="close"
+              data-dismiss="modal"
+              aria-label="Close"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <form>
+              <div class="form-row align-items-center">
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="tareaText">Tarea</label>
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="far fa-file-alt"></i>
+                      </div>
+                    </div>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="tareaText"
+                      placeholder="Tarea"
+                    />
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="namePage3"
+                    >Nombre del usuario</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-user"></i>
+                      </div>
+                    </div>
+                    <select class="form-control" id="userListT"></select>
+                  </div>
+                </div>
+                <div class="col-sm-12 my-1">
+                  <label class="sr-only" for="namePage3"
+                    >Nombre de la página</label
+                  >
+                  <div class="input-group">
+                    <div class="input-group-prepend">
+                      <div class="input-group-text">
+                        <i class="fas fa-pager"></i>
+                      </div>
+                    </div>
+                    <select class="form-control" id="pagesAvisos3"></select>
+                  </div>
+                </div>
+                <div class="col-12 my-1">
+                  <button
+                    onclick="registrarTarea()"
+                    type="button"
+                    class="btn btn-outline-primary btn-block mt-3"
+                  >
+                    Asignar
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
     <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-app.js"></script>
@@ -756,6 +975,7 @@
     ></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.7/firebase-storage.js"></script>
 
     <script src="./js/conexion.js"></script>
     <script src="./js/verificarSesion.js"></script>

@@ -735,6 +735,7 @@ body {
   align-items: center;
   justify-content: center;
   color: #fff;
+  margin-right: 10px;
 }
 .time.is-wait {
   background: #4255d3;
@@ -1065,6 +1066,10 @@ table td,
   margin: 5px 0px 14px 0px;
 }
 /* Utilidades */
+
+.border-rad-10 {
+  border-radius: 10px;
+}
 .pointer {
   cursor: pointer;
 }
@@ -1134,11 +1139,7 @@ table td,
     width: 30%;
   }
 }
-@media screen and (max-width: 1200px) {
-  .time {
-    display: none;
-  }
-}
+
 @media screen and (max-width: 1060px) {
   .user-info .button,
   .user-info .hour {
