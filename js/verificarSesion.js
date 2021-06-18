@@ -826,7 +826,7 @@ const registrarAviso = () => {
                   })
                   .then(function (docRef) {
                     resolve(arrPages);
-
+                    sendEmailAviso();
                     const Toast = Swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -883,7 +883,7 @@ const registrarAviso = () => {
                   })
                   .then(function (docRef) {
                     resolve(arrPages);
-
+                    sendEmailAviso();
                     const Toast = Swal.mixin({
                       toast: true,
                       position: 'top-end',
@@ -1108,7 +1108,7 @@ const registrarComentarioImg = () => {
                       })
                       .then(function (docRef) {
                         resolve(arrPages);
-
+                        sendEmailComentario();
                         const Toast = Swal.mixin({
                           toast: true,
                           position: 'top-end',
@@ -1196,6 +1196,7 @@ const registrarComentarioImg = () => {
                       })
                       .then(function (docRef) {
                         resolve(arrPages);
+                        sendEmailComentario();
 
                         const Toast = Swal.mixin({
                           toast: true,
@@ -1309,6 +1310,7 @@ const registrarComentario = () => {
             })
             .then(function (docRef) {
               resolve(arrPages);
+              sendEmailComentario();
 
               const Toast = Swal.mixin({
                 toast: true,
@@ -1390,6 +1392,7 @@ const registrarComentario = () => {
               })
               .then(function (docRef) {
                 resolve(arrPages);
+                sendEmailComentario();
 
                 const Toast = Swal.mixin({
                   toast: true,
@@ -1494,7 +1497,7 @@ const registrarTarea = () => {
             })
             .then(function (docRef) {
               resolve(arrPages);
-
+              sendEmailTarea(page, user);
               const Toast = Swal.mixin({
                 toast: true,
                 position: 'top-end',
@@ -1540,6 +1543,7 @@ const registrarTarea = () => {
             })
             .then(function (docRef) {
               resolve(arrPages);
+              sendEmailTarea(page, user);
 
               const Toast = Swal.mixin({
                 toast: true,
@@ -1661,7 +1665,7 @@ const tareaIncompleta = (i, page) => {
           })
           .then(function (docRef) {
             resolve(arrPages);
-
+            sendEmailTarea(page, doc.data().arrPages.pagesArr.tareas.reverse()[i].usuario);
             const Toast = Swal.mixin({
               toast: true,
               position: 'top-end',
@@ -1871,7 +1875,7 @@ function registrarAvisoImage() {
                           })
                           .then(function (docRef) {
                             resolve(arrPages);
-
+                            sendEmailAviso();
                             const Toast = Swal.mixin({
                               toast: true,
                               position: 'top-end',
@@ -1941,7 +1945,7 @@ function registrarAvisoImage() {
                           })
                           .then(function (docRef) {
                             resolve(arrPages);
-
+                            sendEmailAviso();
                             const Toast = Swal.mixin({
                               toast: true,
                               position: 'top-end',
@@ -2042,74 +2046,245 @@ function fileValidation() {
 
 // Enviar emails
 
-const sendEmail = () => {
-  let datos = {
-    nombre: 'Daniel Uribe García',
-    email: 'daniel.dg77.dg77@gmail.com',
-  };
+const sendEmailAviso = () => {
+
+  db.collection('col-sala')
+    .doc('azlo')
+    .collection('col-usuarios')
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+
+        $.ajax({
+          type: "POST",
+          url: "mail.php",
+          data: {
+            nombre: doc.data().nombre,
+            email: doc.data().email,
+          },
+          beforeSend: function () {
+
+            // let timerInterval
+            // Swal.fire({
+            //   title: 'Auto close alert!',
+            //   html: 'I will close in <b></b> milliseconds.',
+
+            //   timerProgressBar: true,
+            //   didOpen: () => {
+            //     Swal.showLoading()
+            //     timerInterval = setInterval(() => {
+            //       const content = Swal.getHtmlContainer()
+            //       if (content) {
+            //         const b = content.querySelector('b')
+            //         if (b) {
+            //           b.textContent = Swal.getTimerLeft()
+            //         }
+            //       }
+            //     }, 100)
+            //   },
+            //   willClose: () => {
+            //     clearInterval(timerInterval)
+            //   }
+            // }).then((result) => {
+            //   /* Read more about handling dismissals below */
+            //   if (result.dismiss === Swal.DismissReason.timer) {
+            //     console.log('I was closed by the timer')
+            //   }
+            // })
+          },
+          success: function (msg) {
+            //console.log(msg);
+            if (msg.res == false) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Ups...',
+                text: 'ERROR',
+                confirmButtonText: 'Aceptar',
+              });
 
 
-  $.ajax({
-    type: "POST",
-    url: "mail.php",
-    data: datos,
-    beforeSend: function () {
+            } else if (msg.res == true) {
+              console.log('true');
 
-      // let timerInterval
-      // Swal.fire({
-      //   title: 'Auto close alert!',
-      //   html: 'I will close in <b></b> milliseconds.',
+            }
 
-      //   timerProgressBar: true,
-      //   didOpen: () => {
-      //     Swal.showLoading()
-      //     timerInterval = setInterval(() => {
-      //       const content = Swal.getHtmlContainer()
-      //       if (content) {
-      //         const b = content.querySelector('b')
-      //         if (b) {
-      //           b.textContent = Swal.getTimerLeft()
-      //         }
-      //       }
-      //     }, 100)
-      //   },
-      //   willClose: () => {
-      //     clearInterval(timerInterval)
-      //   }
-      // }).then((result) => {
-      //   /* Read more about handling dismissals below */
-      //   if (result.dismiss === Swal.DismissReason.timer) {
-      //     console.log('I was closed by the timer')
-      //   }
-      // })
-    },
-    success: function (msg) {
-      console.log(msg);
-      if (msg.res == false) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Ups...',
-          text: 'ERROR',
-          confirmButtonText: 'Aceptar',
+
+          },
+          error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+              $.each(errors, function (i) {
+                console.log(errors[i]);
+              });
+            }
+          }
         });
+      })
+    })
+    .catch((error) => {
+      console.log('Error getting document:', error);
+    });
 
 
-      } else if (msg.res == true) {
-        console.log('true');
-
-      }
-
-
-    },
-    error: function (data) {
-      var errors = data.responseJSON;
-      if (errors) {
-        $.each(errors, function (i) {
-          console.log(errors[i]);
-        });
-      }
-    }
-  });
 }
 
-sendEmail();
+const sendEmailComentario = () => {
+
+  db.collection('col-sala')
+    .doc('azlo')
+    .collection('col-usuarios')
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+
+        $.ajax({
+          type: "POST",
+          url: "mailComentarios.php",
+          data: {
+            nombre: doc.data().nombre,
+            email: doc.data().email,
+          },
+          beforeSend: function () {
+
+            // let timerInterval
+            // Swal.fire({
+            //   title: 'Auto close alert!',
+            //   html: 'I will close in <b></b> milliseconds.',
+
+            //   timerProgressBar: true,
+            //   didOpen: () => {
+            //     Swal.showLoading()
+            //     timerInterval = setInterval(() => {
+            //       const content = Swal.getHtmlContainer()
+            //       if (content) {
+            //         const b = content.querySelector('b')
+            //         if (b) {
+            //           b.textContent = Swal.getTimerLeft()
+            //         }
+            //       }
+            //     }, 100)
+            //   },
+            //   willClose: () => {
+            //     clearInterval(timerInterval)
+            //   }
+            // }).then((result) => {
+            //   /* Read more about handling dismissals below */
+            //   if (result.dismiss === Swal.DismissReason.timer) {
+            //     console.log('I was closed by the timer')
+            //   }
+            // })
+          },
+          success: function (msg) {
+            //console.log(msg);
+            if (msg.res == false) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Ups...',
+                text: 'ERROR',
+                confirmButtonText: 'Aceptar',
+              });
+
+
+            } else if (msg.res == true) {
+              console.log('true');
+
+            }
+
+
+          },
+          error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+              $.each(errors, function (i) {
+                console.log(errors[i]);
+              });
+            }
+          }
+        });
+      })
+    })
+    .catch((error) => {
+      console.log('Error getting document:', error);
+    });
+}
+
+const sendEmailTarea = (pagina, nombre) => {
+
+  db.collection('col-sala')
+    .doc('azlo')
+    .collection('col-usuarios').where('nombre', '==', nombre)
+    .get()
+    .then(function (querySnapshot) {
+      querySnapshot.forEach(function (doc) {
+
+        $.ajax({
+          type: "POST",
+          url: "mailTareas.php",
+          data: {
+            nombre: doc.data().nombre,
+            email: doc.data().email,
+            pagina: pagina,
+          },
+          beforeSend: function () {
+
+            // let timerInterval
+            // Swal.fire({
+            //   title: 'Auto close alert!',
+            //   html: 'I will close in <b></b> milliseconds.',
+
+            //   timerProgressBar: true,
+            //   didOpen: () => {
+            //     Swal.showLoading()
+            //     timerInterval = setInterval(() => {
+            //       const content = Swal.getHtmlContainer()
+            //       if (content) {
+            //         const b = content.querySelector('b')
+            //         if (b) {
+            //           b.textContent = Swal.getTimerLeft()
+            //         }
+            //       }
+            //     }, 100)
+            //   },
+            //   willClose: () => {
+            //     clearInterval(timerInterval)
+            //   }
+            // }).then((result) => {
+            //   /* Read more about handling dismissals below */
+            //   if (result.dismiss === Swal.DismissReason.timer) {
+            //     console.log('I was closed by the timer')
+            //   }
+            // })
+          },
+          success: function (msg) {
+            //console.log(msg);
+            if (msg.res == false) {
+              Swal.fire({
+                icon: 'error',
+                title: 'Ups...',
+                text: 'ERROR',
+                confirmButtonText: 'Aceptar',
+              });
+
+
+            } else if (msg.res == true) {
+              console.log('true');
+
+            }
+
+
+          },
+          error: function (data) {
+            var errors = data.responseJSON;
+            if (errors) {
+              $.each(errors, function (i) {
+                console.log(errors[i]);
+              });
+            }
+          }
+        });
+      })
+    })
+    .catch((error) => {
+      console.log('Error getting document:', error);
+    });
+}

@@ -22,24 +22,24 @@ require 'vendor/autoload.php';
 $mail = new PHPMailer(true);
 
 try {
-    //Server settings
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
-    $mail->isSMTP();                                            //Send using SMTP
-    $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
-    $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
-    $mail->Username   = 'daniel.uribe.garcia07@gmail.com';                     //SMTP username
-    $mail->Password   = 'Chivas1314_';                               //SMTP password
-    $mail->SMTPSecure = 'tls';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
-    $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
+  //Server settings
+  $mail->SMTPDebug = SMTP::DEBUG_SERVER;                      //Enable verbose debug output
+  $mail->isSMTP();                                            //Send using SMTP
+  $mail->Host       = 'smtp.gmail.com';                     //Set the SMTP server to send through
+  $mail->SMTPAuth   = true;                                   //Enable SMTP authentication
+  $mail->Username   = 'daniel.uribe.garcia07@gmail.com';                     //SMTP username
+  $mail->Password   = 'Chivas1314_';                               //SMTP password
+  $mail->SMTPSecure = 'tls';         //Enable TLS encryption; `PHPMailer::ENCRYPTION_SMTPS` encouraged
+  $mail->Port       = 587;                                    //TCP port to connect to, use 465 for `PHPMailer::ENCRYPTION_SMTPS` above
 
-    //Recipients
-    $mail->setFrom('daniel.uribe.garcia07@gmail.com', 'Azlo Admin');
-    $mail->addAddress($email, $nombre);     //Add a recipient               
+  //Recipients
+  $mail->setFrom('daniel.uribe.garcia07@gmail.com', 'Azlo Admin');
+  $mail->addAddress($email, $nombre);     //Add a recipient               
 
-    //Content
-    $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Nuevo aviso';
-    $mail->Body    = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+  //Content
+  $mail->isHTML(true);                                  //Set email format to HTML
+  $mail->Subject = 'Nuevo comentario';
+  $mail->Body    = '<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html
   xmlns="http://www.w3.org/1999/xhtml"
   xmlns:o="urn:schemas-microsoft-com:office:office"
@@ -519,8 +519,8 @@ try {
                                         font-size: 20px;
                                       "
                                     >
-                                      Se ha creado un nuevo aviso, da click en
-                                      el botón de abajo para poder ver el aviso.
+                                      Se ha creado un nuevo comentario, da click en
+                                      el botón de abajo para poder ver el comentario.
                                     </p>
                                   </td>
                                 </tr>
@@ -748,7 +748,7 @@ try {
                                       ><img
                                         class="adapt-img"
                                         src="https://ltefgn.stripocdn.email/content/guids/CABINET_729b6a94015d410538fa6f6810b21b85/images/17611519723274581.png"
-                                        alt="Nuevo aviso"
+                                        alt="Nuevo comentario"
                                         style="
                                           display: block;
                                           border: 0;
@@ -757,7 +757,7 @@ try {
                                           -ms-interpolation-mode: bicubic;
                                           border-radius: 3px 3px 0 0;
                                         "
-                                        title="Nuevo aviso"
+                                        title="Nuevo comentario"
                                         width="600"
                                     /></a>
                                   </td>
@@ -786,7 +786,7 @@ try {
                                         color: #444444;
                                       "
                                     >
-                                      Nuevo aviso
+                                      Nuevo comentario
                                     </h2>
                                   </td>
                                 </tr>
@@ -838,7 +838,7 @@ try {
                                           width: auto;
                                           text-align: center;
                                         "
-                                        >Ver aviso →</a
+                                        >Ver comentario →</a
                                       ></span
                                     >
                                   </td>
@@ -1009,8 +1009,8 @@ try {
 ';
 
 
-    $mail->send();
-    echo 'Message has been sent';
+  $mail->send();
+  echo 'Message has been sent';
 } catch (Exception $e) {
-    echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+  echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
 }
