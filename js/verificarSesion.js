@@ -2506,7 +2506,7 @@ const sendEmailFirebaseAviso = (email, nombre) => {
                                     "
                                   >
                                     <a
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       target="_blank"
                                       style="
                                         -webkit-text-size-adjust: none;
@@ -2799,7 +2799,7 @@ const sendEmailFirebaseAviso = (email, nombre) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
@@ -2876,7 +2876,7 @@ const sendEmailFirebaseAviso = (email, nombre) => {
                                         width: auto;
                                       "
                                       ><a
-                                        href="https://viewstripo.email"
+                                        href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                         class="es-button"
                                         target="_blank"
                                         style="
@@ -3002,7 +3002,7 @@ const sendEmailFirebaseAviso = (email, nombre) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
@@ -3483,7 +3483,7 @@ const sendEmailFirebaseComentario = (email, nombre) => {
                                     "
                                   >
                                     <a
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       target="_blank"
                                       style="
                                         -webkit-text-size-adjust: none;
@@ -3776,7 +3776,7 @@ const sendEmailFirebaseComentario = (email, nombre) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
@@ -3853,7 +3853,7 @@ const sendEmailFirebaseComentario = (email, nombre) => {
                                         width: auto;
                                       "
                                       ><a
-                                        href="https://viewstripo.email"
+                                        href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                         class="es-button"
                                         target="_blank"
                                         style="
@@ -3979,7 +3979,7 @@ const sendEmailFirebaseComentario = (email, nombre) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
@@ -4460,7 +4460,7 @@ const sendEmailFirebaseTarea = (email, nombre, pagina) => {
                                     "
                                   >
                                     <a
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       target="_blank"
                                       style="
                                         -webkit-text-size-adjust: none;
@@ -4753,7 +4753,7 @@ const sendEmailFirebaseTarea = (email, nombre, pagina) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
@@ -4830,7 +4830,7 @@ const sendEmailFirebaseTarea = (email, nombre, pagina) => {
                                         width: auto;
                                       "
                                       ><a
-                                        href="https://viewstripo.email"
+                                        href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                         class="es-button"
                                         target="_blank"
                                         style="
@@ -4956,7 +4956,7 @@ const sendEmailFirebaseTarea = (email, nombre, pagina) => {
                                   >
                                     <a
                                       target="_blank"
-                                      href="https://viewstripo.email"
+                                      href="https://danieluribedgsan.github.io/azlo-admin/index.html"
                                       style="
                                         -webkit-text-size-adjust: none;
                                         -ms-text-size-adjust: none;
