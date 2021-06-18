@@ -1079,7 +1079,7 @@ table td,
   justify-content: center;
 }
 
-@media screen and (max-width: 1500px) {
+@media screen and (max-width: 3000px) {
   .activity {
     width: 49%;
     max-width: none;

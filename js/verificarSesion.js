@@ -16,7 +16,7 @@ firebase.auth().onAuthStateChanged(function (user) {
                 alt=""
               />`;
   } else {
-    location.href = '/login.html';
+    location.href = 'login.html';
   }
 });
 
@@ -26,11 +26,11 @@ const logout2 = document.querySelector('#logout2');
 
 logout.addEventListener('click', (e) => {
   e.preventDefault();
-  auth.signOut().then(() => {});
+  auth.signOut().then(() => { });
 });
 logout2.addEventListener('click', (e) => {
   e.preventDefault();
-  auth.signOut().then(() => {});
+  auth.signOut().then(() => { });
 });
 
 // Consultas
@@ -39,7 +39,7 @@ db.collection('col-sala')
   .doc('azlo')
   .collection('col-usuarios')
   .onSnapshot((querySnapshot) => {
-    querySnapshot.forEach((doc) => {});
+    querySnapshot.forEach((doc) => { });
   });
 
 db.collection('col-sala')
@@ -65,12 +65,12 @@ db.collection('col-sala')
                   <a
                     class="nav-link active"
                     id="pills${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}"
                     data-toggle="pill"
                     href="#${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -89,11 +89,11 @@ db.collection('col-sala')
 
           <div class="destination mt-3">
                   <div class="row w-100" id='${doc
-                    .data()
-                    .arrPages.pagesArr.pagina.replace(
-                      ' ',
-                      ''
-                    )}2'>                   
+            .data()
+            .arrPages.pagesArr.pagina.replace(
+              ' ',
+              ''
+            )}2'>                   
                   </div>
                 </div>
           
@@ -104,12 +104,12 @@ db.collection('col-sala')
                   <a
                     class="nav-link active"
                     id="pills${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
                     data-toggle="pill"
                     href="#${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -139,12 +139,12 @@ db.collection('col-sala')
                   <a
                     class="nav-link "
                     id="pills${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}"
                     data-toggle="pill"
                     href="#${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -162,11 +162,11 @@ db.collection('col-sala')
           > 
             <div class="destination mt-3">
                   <div class="row w-100" id='${doc
-                    .data()
-                    .arrPages.pagesArr.pagina.replace(
-                      ' ',
-                      ''
-                    )}2'>                    
+            .data()
+            .arrPages.pagesArr.pagina.replace(
+              ' ',
+              ''
+            )}2'>                    
                   </div>
                 </div>
           </div>
@@ -176,12 +176,12 @@ db.collection('col-sala')
                   <a
                     class="nav-link "
                     id="pills${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
                     data-toggle="pill"
                     href="#${doc
-                      .data()
-                      .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -198,8 +198,8 @@ db.collection('col-sala')
             .arrPages.pagesArr.pagina.replace(' ', '')}t2"
           > 
            <div class=" mt-3" id='${doc
-             .data()
-             .arrPages.pagesArr.pagina.replace(' ', '')}3'>
+            .data()
+            .arrPages.pagesArr.pagina.replace(' ', '')}3'>
                            
           </div>
           </div>
@@ -221,8 +221,8 @@ db.collection('col-sala')
                   </tr>
                 </thead>
                 <tbody id="${doc
-                  .data()
-                  .arrPages.pagesArr.pagina.replace(' ', '')}5">
+          .data()
+          .arrPages.pagesArr.pagina.replace(' ', '')}5">
                  
                 </tbody>
               </table>`;
@@ -239,9 +239,8 @@ db.collection('col-sala')
             tableQ.innerHTML += ` 
                   <tr>
                     <td>
-                      <input type="checkbox" class="table-row float-left" onclick="tareaCompletada(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')" />
+                      <input type="checkbox" class="table-row float-left" onclick="tareaCompletada(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')" />
                        <div class="dropdown float-left" style="width:40%">                  
                   <span class="time pointer" id="dropdownMenuButton2"
                     data-toggle="dropdown"
@@ -253,16 +252,14 @@ db.collection('col-sala')
                     aria-labelledby="dropdownMenuButton2"
                   >
                     <a
-                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Tarea incompleta
                       
                       <i class="fas fa-chalkboard float-right mt-1"></i>
                     </a>
-                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Eliminar tarea
                       <i class="fas fa-trash-alt float-right mt-1"></i
                     ></a>
@@ -298,9 +295,8 @@ db.collection('col-sala')
             tableQ.innerHTML += ` 
                   <tr>
                     <td>
-                      <input type="checkbox" class="table-row float-left" onclick="tareaCompletada(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')" />
+                      <input type="checkbox" class="table-row float-left" onclick="tareaCompletada(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')" />
                             <div class="dropdown float-left" style="width:40%">                  
                   <span class="time pointer" id="dropdownMenuButton2"
                     data-toggle="dropdown"
@@ -312,16 +308,14 @@ db.collection('col-sala')
                     aria-labelledby="dropdownMenuButton2"
                   >
                     <a
-                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Tarea incompleta
                       
                       <i class="fas fa-chalkboard float-right mt-1"></i>
                     </a>
-                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Eliminar tarea
                       <i class="fas fa-trash-alt float-right mt-1"></i
                     ></a>
@@ -344,9 +338,8 @@ db.collection('col-sala')
             tableQ.innerHTML += ` 
                   <tr>
                     <td>
-                      <input type="checkbox" checked class="table-row float-left" onclick="tareaCompletada(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')" />
+                      <input type="checkbox" checked class="table-row float-left" onclick="tareaCompletada(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')" />
                             <div class="dropdown float-left" style="width:40%">                  
                   <span class="time pointer" id="dropdownMenuButton2"
                     data-toggle="dropdown"
@@ -358,16 +351,14 @@ db.collection('col-sala')
                     aria-labelledby="dropdownMenuButton2"
                   >
                     <a
-                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                      class="dropdown-item pointer" onclick="tareaIncompleta(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Tarea incompleta
                       
                       <i class="fas fa-chalkboard float-right mt-1"></i>
                     </a>
-                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')"
+                    <a class="dropdown-item pointer" onclick="eliminarTarea(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')"
                       >Eliminar tarea
                       <i class="fas fa-trash-alt float-right mt-1"></i
                     ></a>
@@ -404,15 +395,12 @@ db.collection('col-sala')
                       <i class="fas fa-ellipsis-v delete pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  <a class="dropdown-item pointer"  onclick="mostrarDatosComment('${
-    doc.data().arrPages.pagesArr.pagina
-  }',${i})">Escribir comentario <i class="far fa-comment-dots float-right mt-1"></i></a>
-  <a class="dropdown-item" onclick="mostrarDataCommentImg('${
-    doc.data().arrPages.pagesArr.pagina
-  }',${i})">Comentario con imagen <i class="far fa-check-circle float-right mt-1"></i></a>
-  <a class="dropdown-item pointer" onclick="deleteAviso(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')">Eliminar aviso <i class="far fa-trash-alt float-right mt-1"></i> </a>
+  <a class="dropdown-item pointer"  onclick="mostrarDatosComment('${doc.data().arrPages.pagesArr.pagina
+              }',${i})">Escribir comentario <i class="far fa-comment-dots float-right mt-1"></i></a>
+  <a class="dropdown-item" onclick="mostrarDataCommentImg('${doc.data().arrPages.pagesArr.pagina
+              }',${i})">Comentario con imagen <i class="far fa-check-circle float-right mt-1"></i></a>
+  <a class="dropdown-item pointer" onclick="deleteAviso(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')">Eliminar aviso <i class="far fa-trash-alt float-right mt-1"></i> </a>
   </div>
 </div>
                         <div class="destination-profile">
@@ -436,8 +424,8 @@ db.collection('col-sala')
                         <hr/>
                         <p clas="mt-3">Comentarios</p>
                         <div id='comment${i + 80}${doc
-              .data()
-              .arrPages.pagesArr.pagina.replace(' ', '')}'>
+                .data()
+                .arrPages.pagesArr.pagina.replace(' ', '')}'>
                           
                           </div>
                       </div>
@@ -449,15 +437,12 @@ db.collection('col-sala')
                       <i class="fas fa-ellipsis-v delete pointer" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" ></i>
 
   <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-  <a class="dropdown-item pointer"  onclick="mostrarDatosComment('${
-    doc.data().arrPages.pagesArr.pagina
-  }',${i})">Escribir comentario <i class="far fa-comment-dots float-right mt-1"></i></a>
-  <a class="dropdown-item" onclick="mostrarDataCommentImg('${
-    doc.data().arrPages.pagesArr.pagina
-  }',${i})">Comentario con imagen <i class="far fa-check-circle float-right mt-1"></i></a>
-  <a class="dropdown-item pointer" onclick="deleteAviso(${i},'${
-              doc.data().arrPages.pagesArr.pagina
-            }')">Eliminar aviso <i class="far fa-trash-alt float-right mt-1"></i> </a>
+  <a class="dropdown-item pointer"  onclick="mostrarDatosComment('${doc.data().arrPages.pagesArr.pagina
+              }',${i})">Escribir comentario <i class="far fa-comment-dots float-right mt-1"></i></a>
+  <a class="dropdown-item" onclick="mostrarDataCommentImg('${doc.data().arrPages.pagesArr.pagina
+              }',${i})">Comentario con imagen <i class="far fa-check-circle float-right mt-1"></i></a>
+  <a class="dropdown-item pointer" onclick="deleteAviso(${i},'${doc.data().arrPages.pagesArr.pagina
+              }')">Eliminar aviso <i class="far fa-trash-alt float-right mt-1"></i> </a>
   </div>
 </div>
                         <div class="destination-profile">
@@ -477,8 +462,8 @@ db.collection('col-sala')
                         <hr/>
                         <p clas="mt-3">Comentarios</p>
                         <div id='comment${i + 80}${doc
-              .data()
-              .arrPages.pagesArr.pagina.replace(' ', '')}'>
+                .data()
+                .arrPages.pagesArr.pagina.replace(' ', '')}'>
                           
                           </div>
                       </div>
@@ -725,18 +710,14 @@ db.collection('col-sala')
 
     // $('#list-filter').html('');
     querySnapshot.forEach((doc) => {
-      selectPages.innerHTML += `<option value='${
-        doc.data().arrPages.pagesArr.pagina
-      }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
-      selectPages2.innerHTML += `<option value='${
-        doc.data().arrPages.pagesArr.pagina
-      }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
-      selectPages3.innerHTML += `<option value='${
-        doc.data().arrPages.pagesArr.pagina
-      }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
-      selectPages4.innerHTML += `<option value='${
-        doc.data().arrPages.pagesArr.pagina
-      }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
+      selectPages.innerHTML += `<option value='${doc.data().arrPages.pagesArr.pagina
+        }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
+      selectPages2.innerHTML += `<option value='${doc.data().arrPages.pagesArr.pagina
+        }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
+      selectPages3.innerHTML += `<option value='${doc.data().arrPages.pagesArr.pagina
+        }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
+      selectPages4.innerHTML += `<option value='${doc.data().arrPages.pagesArr.pagina
+        }'>${doc.data().arrPages.pagesArr.pagina}</option>`;
     });
   });
 
@@ -761,9 +742,8 @@ db.collection('col-sala')
                   <div class="credit-status">${doc.data().email}</div>
                 </div>                
               </div>`;
-      listSelect.innerHTML += `<option value='${doc.data().nombre}'>${
-        doc.data().nombre
-      }</option>`;
+      listSelect.innerHTML += `<option value='${doc.data().nombre}'>${doc.data().nombre
+        }</option>`;
     });
   });
 
@@ -1839,9 +1819,9 @@ function registrarAvisoImage() {
 
               var imagenStorageRef = storageRef.child(
                 'azloImagenes/' +
-                  selectPage.replace(' ', '') +
-                  '/' +
-                  imagen.name
+                selectPage.replace(' ', '') +
+                '/' +
+                imagen.name
               );
 
               imagenStorageRef.put(imagen).then(function (snapshot) {
@@ -2059,3 +2039,77 @@ function fileValidation() {
     return false;
   }
 }
+
+// Enviar emails
+
+const sendEmail = () => {
+  let datos = {
+    nombre: 'Daniel Uribe García',
+    email: 'daniel.dg77.dg77@gmail.com',
+  };
+
+
+  $.ajax({
+    type: "POST",
+    url: "mail.php",
+    data: datos,
+    beforeSend: function () {
+
+      // let timerInterval
+      // Swal.fire({
+      //   title: 'Auto close alert!',
+      //   html: 'I will close in <b></b> milliseconds.',
+
+      //   timerProgressBar: true,
+      //   didOpen: () => {
+      //     Swal.showLoading()
+      //     timerInterval = setInterval(() => {
+      //       const content = Swal.getHtmlContainer()
+      //       if (content) {
+      //         const b = content.querySelector('b')
+      //         if (b) {
+      //           b.textContent = Swal.getTimerLeft()
+      //         }
+      //       }
+      //     }, 100)
+      //   },
+      //   willClose: () => {
+      //     clearInterval(timerInterval)
+      //   }
+      // }).then((result) => {
+      //   /* Read more about handling dismissals below */
+      //   if (result.dismiss === Swal.DismissReason.timer) {
+      //     console.log('I was closed by the timer')
+      //   }
+      // })
+    },
+    success: function (msg) {
+      console.log(msg);
+      if (msg.res == false) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Ups...',
+          text: 'ERROR',
+          confirmButtonText: 'Aceptar',
+        });
+
+
+      } else if (msg.res == true) {
+        console.log('true');
+
+      }
+
+
+    },
+    error: function (data) {
+      var errors = data.responseJSON;
+      if (errors) {
+        $.each(errors, function (i) {
+          console.log(errors[i]);
+        });
+      }
+    }
+  });
+}
+
+sendEmail();

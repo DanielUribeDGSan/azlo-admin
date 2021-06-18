@@ -68,7 +68,7 @@ const verificarUsuario = (email, name, foto) => {
     .get()
     .then((doc) => {
       if (doc.exists) {
-        location.href = '/index.html';
+        location.href = 'index.html';
       } else {
         const registro = {
           nombre: name,
