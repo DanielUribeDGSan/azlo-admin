@@ -2,11 +2,25 @@ var docPagesRef = db.collection('col-sala').doc('azlo').collection('col-pages');
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
+    const { displayName, email, photoURL } = user;
+
+    const arrPermisos = [
+      "daniel@azlo.online",
+    ];
+
+    const validPermiso = arrPermisos.includes(email);
+
+    if (validPermiso == false) {
+      $('.validClass').hide();
+    } else {
+      $('.validAll').hide();
+    }
+
+
     const nameUser = document.querySelector('#nameUser');
     const imageUser = document.querySelector('#imageUser');
     const imageUser2 = document.querySelector('#imgUser2');
     const nameUser2 = document.querySelector('.discount-name');
-    const { displayName, email, photoURL } = user;
     nameUser.innerHTML = displayName;
     nameUser2.innerHTML = displayName;
     imageUser.innerHTML = `<img class="img__user" src="${photoURL}" alt="azlo" />`;
@@ -58,7 +72,7 @@ db.collection('col-sala')
     let cont = 0;
 
     querySnapshot.forEach((doc) => {
-      console.log(doc.data());
+
 
       if (cont === 0) {
         pages.innerHTML += ` <li class="nav-item" role="presentation">
@@ -66,11 +80,11 @@ db.collection('col-sala')
                     class="nav-link active"
                     id="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
                     data-toggle="pill"
                     href="#${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -80,20 +94,17 @@ db.collection('col-sala')
 
         tabContent.innerHTML += `<div
           class="tab-pane fade show active"
-          id="${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}"
+          id="${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}"
           role="tabpanel"
           aria-labelledby="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
           > 
 
           <div class="destination mt-3">
                   <div class="row w-100" id='${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(
-              ' ',
-              ''
-            )}2'>                   
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}2'>
                   </div>
                 </div>
           
@@ -105,11 +116,11 @@ db.collection('col-sala')
                     class="nav-link active"
                     id="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
                     data-toggle="pill"
                     href="#${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -119,16 +130,16 @@ db.collection('col-sala')
 
         tabContent2.innerHTML += `<div
           class="tab-pane fade show active"
-          id="${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}t2"
+          id="${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
           role="tabpanel"
           aria-labelledby="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
           > 
 
           <div class=" mt-3" id='${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}3'>
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}3'>
                  
           
           </div>
@@ -140,11 +151,11 @@ db.collection('col-sala')
                     class="nav-link "
                     id="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
                     data-toggle="pill"
                     href="#${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -154,19 +165,16 @@ db.collection('col-sala')
 
         tabContent.innerHTML += `<div
           class="tab-pane fade show "
-          id="${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}"
+          id="${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}"
           role="tabpanel"
           aria-labelledby="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}"
           > 
             <div class="destination mt-3">
                   <div class="row w-100" id='${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(
-              ' ',
-              ''
-            )}2'>                    
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}2'>
                   </div>
                 </div>
           </div>
@@ -177,11 +185,11 @@ db.collection('col-sala')
                     class="nav-link "
                     id="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
                     data-toggle="pill"
                     href="#${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
                     role="tab"
                     aria-controls="pills-home"
                     aria-selected="true"
@@ -191,15 +199,15 @@ db.collection('col-sala')
 
         tabContent2.innerHTML += `<div
           class="tab-pane fade show "
-          id="${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}t2"
+          id="${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
           role="tabpanel"
           aria-labelledby="pills${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}t2"
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
           > 
            <div class=" mt-3" id='${doc
             .data()
-            .arrPages.pagesArr.pagina.replace(' ', '')}3'>
+            .arrPages.pagesArr.pagina.replace(/ /g, "")}3'>
                            
           </div>
           </div>
@@ -208,7 +216,7 @@ db.collection('col-sala')
       }
 
       const item2 = document.querySelector(
-        `#${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}3`
+        `#${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}3`
       );
 
       item2.innerHTML = ` <table class="table">
@@ -222,13 +230,13 @@ db.collection('col-sala')
                 </thead>
                 <tbody id="${doc
           .data()
-          .arrPages.pagesArr.pagina.replace(' ', '')}5">
+          .arrPages.pagesArr.pagina.replace(/ /g, "")}5">
                  
                 </tbody>
               </table>`;
 
       const tableQ = document.querySelector(
-        `#${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}5`
+        `#${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}5`
       );
 
       doc
@@ -380,9 +388,9 @@ db.collection('col-sala')
         });
 
       const item = document.querySelector(
-        `#${doc.data().arrPages.pagesArr.pagina.replace(' ', '')}2`
+        `#${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}2`
       );
-
+      console.log(item);
       doc
         .data()
         .arrPages.pagesArr.avisos.reverse()
@@ -425,7 +433,7 @@ db.collection('col-sala')
                         <p clas="mt-3">Comentarios</p>
                         <div id='comment${i + 80}${doc
                 .data()
-                .arrPages.pagesArr.pagina.replace(' ', '')}'>
+                .arrPages.pagesArr.pagina.replace(/ /g, "")}'>
                           
                           </div>
                       </div>
@@ -463,7 +471,7 @@ db.collection('col-sala')
                         <p clas="mt-3">Comentarios</p>
                         <div id='comment${i + 80}${doc
                 .data()
-                .arrPages.pagesArr.pagina.replace(' ', '')}'>
+                .arrPages.pagesArr.pagina.replace(/ /g, "")}'>
                           
                           </div>
                       </div>
@@ -473,7 +481,7 @@ db.collection('col-sala')
           const commentContent = document.querySelector(
             `#comment${i + 80}${doc
               .data()
-              .arrPages.pagesArr.pagina.replace(' ', '')}`
+              .arrPages.pagesArr.pagina.replace(/ /g, "")}`
           );
 
           commentContent.innerHTML = '';
@@ -509,7 +517,7 @@ const deleteAviso = (i, page) => {
     .collection('col-sala')
     .doc('azlo')
     .collection('col-pages')
-    .doc('pages' + page.replace(' ', '') + 'azlo');
+    .doc('pages' + page.replace(/ /g, "") + 'azlo');
   videoRef
     .get()
     .then((doc) => {
@@ -529,7 +537,7 @@ const deleteAviso = (i, page) => {
       };
       return new Promise((resolve, reject) => {
         docPagesRef
-          .doc('pages' + page.replace(' ', '') + 'azlo')
+          .doc('pages' + page.replace(/ /g, "") + 'azlo')
           .set({
             arrPages,
           })
@@ -580,7 +588,7 @@ const eliminarPaginas = () => {
   }
 
   docPagesRef
-    .doc('pages' + page.replace(' ', '') + 'azlo')
+    .doc('pages' + page.replace(/ /g, "") + 'azlo')
     .delete()
     .then(() => {
       const Toast = Swal.mixin({
@@ -627,7 +635,7 @@ const registrarPaginas = () => {
     .collection('col-sala')
     .doc('azlo')
     .collection('col-pages')
-    .doc('pages' + namePage.replace(' ', '') + 'azlo');
+    .doc('pages' + namePage.replace(/ /g, "") + 'azlo');
   videoRef
     .get()
     .then((doc) => {
@@ -663,7 +671,7 @@ const sendPages = (arrPages, namePage) => {
     db.collection('col-sala')
       .doc('azlo')
       .collection('col-pages')
-      .doc('pages' + namePage.replace(' ', '') + 'azlo')
+      .doc('pages' + namePage.replace(/ /g, "") + 'azlo')
       .set({
         arrPages,
       })
@@ -779,7 +787,7 @@ const registrarAviso = () => {
   }
 
   docPagesRef
-    .doc('pages' + selectPage.replace(' ', '') + 'azlo')
+    .doc('pages' + selectPage.replace(/ /g, "") + 'azlo')
     .get()
     .then((doc) => {
       if (doc.exists) {
@@ -820,7 +828,7 @@ const registrarAviso = () => {
               };
               return new Promise((resolve, reject) => {
                 docPagesRef
-                  .doc('pages' + selectPage.replace(' ', '') + 'azlo')
+                  .doc('pages' + selectPage.replace(/ /g, "") + 'azlo')
                   .set({
                     arrPages,
                   })
@@ -1025,7 +1033,7 @@ const registrarComentarioImg = () => {
   }
 
   docPagesRef
-    .doc('pages' + page.replace(' ', '') + 'azlo')
+    .doc('pages' + page.replace(/ /g, "") + 'azlo')
     .get()
     .then((doc) => {
       const arrAvisos = doc.data().arrPages.pagesArr.avisos;
@@ -1039,7 +1047,7 @@ const registrarComentarioImg = () => {
           imagen = fileInputField.files.item(0);
           const { displayName, photoURL } = user;
           var imagenStorageRef = storageRef.child(
-            'azloImagenes/' + page.replace(' ', '') + '/' + imagen.name
+            'azloImagenes/' + page.replace(/ /g, "") + '/' + imagen.name
           );
 
           imagenStorageRef.put(imagen).then(function (snapshot) {
@@ -1190,7 +1198,7 @@ const registrarComentarioImg = () => {
                   };
                   return new Promise((resolve, reject) => {
                     docPagesRef
-                      .doc('pages' + page.replace(' ', '') + 'azlo')
+                      .doc('pages' + page.replace(/ /g, "") + 'azlo')
                       .set({
                         arrPages,
                       })
@@ -1255,7 +1263,7 @@ const registrarComentario = () => {
   }
 
   docPagesRef
-    .doc('pages' + page.replace(' ', '') + 'azlo')
+    .doc('pages' + page.replace(/ /g, "") + 'azlo')
     .get()
     .then((doc) => {
       const arrAvisos = doc.data().arrPages.pagesArr.avisos;
@@ -1386,7 +1394,7 @@ const registrarComentario = () => {
           };
           return new Promise((resolve, reject) => {
             docPagesRef
-              .doc('pages' + page.replace(' ', '') + 'azlo')
+              .doc('pages' + page.replace(/ /g, "") + 'azlo')
               .set({
                 arrPages,
               })
@@ -1468,7 +1476,7 @@ const registrarTarea = () => {
     return false;
   }
   docPagesRef
-    .doc('pages' + page.replace(' ', '') + 'azlo')
+    .doc('pages' + page.replace(/ /g, "") + 'azlo')
     .get()
     .then((doc) => {
       const arrAvisos = doc.data().arrPages.pagesArr.avisos;
@@ -1491,7 +1499,7 @@ const registrarTarea = () => {
         };
         return new Promise((resolve, reject) => {
           docPagesRef
-            .doc('pages' + page.replace(' ', '') + 'azlo')
+            .doc('pages' + page.replace(/ /g, "") + 'azlo')
             .set({
               arrPages,
             })
@@ -1537,7 +1545,7 @@ const registrarTarea = () => {
         };
         return new Promise((resolve, reject) => {
           docPagesRef
-            .doc('pages' + page.replace(' ', '') + 'azlo')
+            .doc('pages' + page.replace(/ /g, "") + 'azlo')
             .set({
               arrPages,
             })
@@ -1580,7 +1588,7 @@ const eliminarTarea = (i, page) => {
     .collection('col-sala')
     .doc('azlo')
     .collection('col-pages')
-    .doc('pages' + page.replace(' ', '') + 'azlo');
+    .doc('pages' + page.replace(/ /g, "") + 'azlo');
   tareaRef
     .get()
     .then((doc) => {
@@ -1598,7 +1606,7 @@ const eliminarTarea = (i, page) => {
       };
       return new Promise((resolve, reject) => {
         docPagesRef
-          .doc('pages' + page.replace(' ', '') + 'azlo')
+          .doc('pages' + page.replace(/ /g, "") + 'azlo')
           .set({
             arrPages,
           })
@@ -1636,7 +1644,7 @@ const tareaIncompleta = (i, page) => {
     .collection('col-sala')
     .doc('azlo')
     .collection('col-pages')
-    .doc('pages' + page.replace(' ', '') + 'azlo');
+    .doc('pages' + page.replace(/ /g, "") + 'azlo');
   tareaRef
     .get()
     .then((doc) => {
@@ -1659,7 +1667,7 @@ const tareaIncompleta = (i, page) => {
       };
       return new Promise((resolve, reject) => {
         docPagesRef
-          .doc('pages' + page.replace(' ', '') + 'azlo')
+          .doc('pages' + page.replace(/ /g, "") + 'azlo')
           .set({
             arrPages,
           })
@@ -1698,7 +1706,7 @@ const tareaCompletada = (i, page) => {
     .collection('col-sala')
     .doc('azlo')
     .collection('col-pages')
-    .doc('pages' + page.replace(' ', '') + 'azlo');
+    .doc('pages' + page.replace(/ /g, "") + 'azlo');
   tareaRef
     .get()
     .then((doc) => {
@@ -1721,7 +1729,7 @@ const tareaCompletada = (i, page) => {
       };
       return new Promise((resolve, reject) => {
         docPagesRef
-          .doc('pages' + page.replace(' ', '') + 'azlo')
+          .doc('pages' + page.replace(/ /g, "") + 'azlo')
           .set({
             arrPages,
           })
@@ -1806,7 +1814,7 @@ function registrarAvisoImage() {
   }
 
   docPagesRef
-    .doc('pages' + selectPage.replace(' ', '') + 'azlo')
+    .doc('pages' + selectPage.replace(/ /g, "") + 'azlo')
     .get()
     .then((doc) => {
       if (doc.exists) {
@@ -1823,7 +1831,7 @@ function registrarAvisoImage() {
 
               var imagenStorageRef = storageRef.child(
                 'azloImagenes/' +
-                selectPage.replace(' ', '') +
+                selectPage.replace(/ /g, "") +
                 '/' +
                 imagen.name
               );
@@ -1869,7 +1877,7 @@ function registrarAvisoImage() {
                       };
                       return new Promise((resolve, reject) => {
                         docPagesRef
-                          .doc('pages' + selectPage.replace(' ', '') + 'azlo')
+                          .doc('pages' + selectPage.replace(/ /g, "") + 'azlo')
                           .set({
                             arrPages,
                           })

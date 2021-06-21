@@ -1147,13 +1147,13 @@ table td,
   }
 }
 @media screen and (max-width: 1020px) {
-  .user-box .cards-view {
+  /* .user-box .cards-view {
     display: none;
   }
 
   .user-box .cards-header .cards-button {
     display: none;
-  }
+  } */
 
   .cards-header-date {
     margin: auto;
