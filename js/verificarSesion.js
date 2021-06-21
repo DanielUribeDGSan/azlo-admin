@@ -1,4 +1,6 @@
 var docPagesRef = db.collection('col-sala').doc('azlo').collection('col-pages');
+const miStorageGlobal = window.localStorage;
+// miStorageGlobal.removeItem('page');
 
 firebase.auth().onAuthStateChanged(function (user) {
   if (user) {
@@ -74,10 +76,15 @@ db.collection('col-sala')
     querySnapshot.forEach((doc) => {
 
 
-      if (cont === 0) {
+      if (cont === 0 && !miStorageGlobal.page || miStorageGlobal.page == doc
+        .data()
+        .arrPages.pagesArr.pagina) {
+
         pages.innerHTML += ` <li class="nav-item" role="presentation">
                   <a
-                    class="nav-link active"
+                    class="nav-link active" onclick="cambiarPosicion('${doc
+            .data()
+            .arrPages.pagesArr.pagina}')"
                     id="pills${doc
             .data()
             .arrPages.pagesArr.pagina.replace(/ /g, "")}"
@@ -113,7 +120,9 @@ db.collection('col-sala')
           `;
         pages2.innerHTML += ` <li class="nav-item" role="presentation">
                   <a
-                    class="nav-link active"
+                    class="nav-link active" onclick="cambiarPosicion('${doc
+            .data()
+            .arrPages.pagesArr.pagina}')"
                     id="pills${doc
             .data()
             .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
@@ -146,9 +155,12 @@ db.collection('col-sala')
           
           `;
       } else {
+
         pages.innerHTML += ` <li class="nav-item" role="presentation">
                   <a
-                    class="nav-link "
+                    class="nav-link " onclick="cambiarPosicion('${doc
+            .data()
+            .arrPages.pagesArr.pagina}')"
                     id="pills${doc
             .data()
             .arrPages.pagesArr.pagina.replace(/ /g, "")}"
@@ -182,7 +194,9 @@ db.collection('col-sala')
           `;
         pages2.innerHTML += ` <li class="nav-item" role="presentation">
                   <a
-                    class="nav-link "
+                    class="nav-link " onclick="cambiarPosicion('${doc
+            .data()
+            .arrPages.pagesArr.pagina}')"
                     id="pills${doc
             .data()
             .arrPages.pagesArr.pagina.replace(/ /g, "")}t2"
@@ -390,13 +404,13 @@ db.collection('col-sala')
       const item = document.querySelector(
         `#${doc.data().arrPages.pagesArr.pagina.replace(/ /g, "")}2`
       );
-      console.log(item);
+
       doc
         .data()
         .arrPages.pagesArr.avisos.reverse()
         .map((data, i) => {
           if (data.imageAviso && data.imageAviso.length > 0) {
-            console.log('entro');
+
             item.innerHTML += `<div class="col-auto pr-1 mt-3">
                       <div class="destination-card">
                       <div class="dropdown">
@@ -645,7 +659,7 @@ const eliminarPaginas = () => {
 //   Registrar paginas
 
 const registrarPaginas = () => {
-  const namePage = document.querySelector('#namePage').value;
+  const namePage = document.querySelector('#namePage').value.trim();
 
   if (namePage === '') {
     Swal.fire({
@@ -1218,7 +1232,7 @@ const registrarComentarioImg = () => {
                     comentarios: arrComent,
                   };
                   arrAvisos.reverse().splice(id, 1, arrAvisos2);
-                  console.log(arrAvisos);
+
                   const arrPages = {
                     pagesArr: {
                       pagina: page,
@@ -1414,7 +1428,7 @@ const registrarComentario = () => {
             comentarios: arrComent,
           };
           arrAvisos.reverse().splice(id, 1, arrAvisos2);
-          console.log(arrAvisos);
+
           const arrPages = {
             pagesArr: {
               pagina: page,
@@ -1559,7 +1573,7 @@ const registrarTarea = () => {
         });
       } else {
         const arrTareas = doc.data().arrPages.pagesArr.tareas;
-        console.log('Tareas', arrTareas);
+
         arrTareas.push({
           tarea: tarea,
           usuario: user,
@@ -5079,4 +5093,10 @@ const sendEmailFirebaseTarea = (email, nombre, pagina) => {
 </html>`,
     },
   })
+}
+
+
+const cambiarPosicion = (page) => {
+  const miStorage = window.localStorage;
+  miStorage.setItem('page', page);
 }

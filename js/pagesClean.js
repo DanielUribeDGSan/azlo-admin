@@ -9,7 +9,6 @@ setTimeout(function () {
             ];
 
             const validPermiso = arrPermisos.includes(email);
-            console.log(validPermiso);
             if (validPermiso == false) {
                 $('.validClass').hide();
             } else {
