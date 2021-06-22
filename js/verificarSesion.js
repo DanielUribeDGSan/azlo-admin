@@ -8,6 +8,7 @@ firebase.auth().onAuthStateChanged(function (user) {
 
     const arrPermisos = [
       "daniel@azlo.online",
+      "isaac@azlo.online"
     ];
 
     const validPermiso = arrPermisos.includes(email);
