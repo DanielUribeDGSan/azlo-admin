@@ -2151,13 +2151,14 @@ const sendEmailAviso = () => {
 }
 
 const sendEmailComentario = () => {
-
+  return false;
   db.collection('col-sala')
     .doc('azlo')
     .collection('col-usuarios')
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
+
         sendEmailFirebaseComentario(doc.data().email, doc.data().nombre);
       })
     })
