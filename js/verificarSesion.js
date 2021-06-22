@@ -2140,7 +2140,16 @@ const sendEmailAviso = () => {
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
-        sendEmailFirebaseAviso(doc.data().email, doc.data().nombre);
+        firebase.auth().onAuthStateChanged(function (user) {
+          if (user) {
+            const { displayName, email, photoURL } = user;
+            if (email != doc.data().email) {
+              sendEmailFirebaseAviso(doc.data().email, doc.data().nombre);
+            }
+          } else {
+
+          }
+        });
       })
     })
     .catch((error) => {
@@ -2175,6 +2184,7 @@ const sendEmailTarea = (pagina, nombre) => {
     .get()
     .then(function (querySnapshot) {
       querySnapshot.forEach(function (doc) {
+
         sendEmailFirebaseTarea(doc.data().email, nombre, pagina);
       })
     })
