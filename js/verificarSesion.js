@@ -237,9 +237,10 @@ db.collection('col-sala')
                 <thead>
                   <tr>
                     <th class="pl-0">Check</th>
-                    <th class="pl-0">Nombre</th>
+                    <th class="pl-0">Asignado(a)</th>
                     <th class="pl-0">Tarea</th>
                     <th class="pl-0">Status</th>
+                    <th class="pl-0">Completada por</th>
                   </tr>
                 </thead>
                 <tbody id="${doc
@@ -256,7 +257,7 @@ db.collection('col-sala')
       doc
         .data()
         .arrPages.pagesArr.tareas.reverse()
-        .map(({ usuario, tarea, status }, i) => {
+        .map(({ usuario, tarea, status, name }, i) => {
           if (status == 'waiting') {
             tableQ.innerHTML += ` 
                   <tr>
@@ -311,6 +312,7 @@ db.collection('col-sala')
                         Waiting
                       </div>
                     </td>
+                    <td>Tarea en espera</td>
                   </tr>
                `;
           } else if (status == 'pending') {
@@ -354,14 +356,14 @@ db.collection('col-sala')
                         Pending
                       </div>
                     </td>
+                    <td>Tarea pendiente</td>
                   </tr>
                `;
           } else if (status == 'completed') {
             tableQ.innerHTML += ` 
                   <tr>
                     <td>
-                      <input type="checkbox" checked class="table-row float-left" onclick="tareaCompletada(${i},'${doc.data().arrPages.pagesArr.pagina
-              }')" />
+                      <p class="float-left mr-1">Tarea completada</p>
                             <div class="dropdown float-left" style="width:40%">                  
                   <span class="time pointer validClass" id="dropdownMenuButton2"
                     data-toggle="dropdown"
@@ -396,6 +398,7 @@ db.collection('col-sala')
                       Completed
                     </div>
                     </td>
+                    <td>${name}</td>
                   </tr>
                `;
           }
@@ -1532,6 +1535,7 @@ const registrarTarea = () => {
           usuario: user,
           pagina: page,
           status: 'waiting',
+          name: '',
         });
 
         const arrPages = {
@@ -1579,6 +1583,8 @@ const registrarTarea = () => {
           usuario: user,
           pagina: page,
           status: 'waiting',
+          name: '',
+
         });
         const arrPages = {
           pagesArr: {
@@ -1716,6 +1722,7 @@ const tareaIncompleta = (i, page) => {
         status: 'pending',
         tarea: doc.data().arrPages.pagesArr.tareas.reverse()[i].tarea,
         usuario: doc.data().arrPages.pagesArr.tareas.reverse()[i].usuario,
+        name: ''
       });
 
       const arrPages = {
@@ -1770,52 +1777,62 @@ const tareaCompletada = (i, page) => {
   tareaRef
     .get()
     .then((doc) => {
-      const arr = doc.data().arrPages.pagesArr.avisos;
-      const arrTareas = doc.data().arrPages.pagesArr.tareas;
-      const arrTareas2 = doc.data().arrPages.pagesArr.tareas;
-      arrTareas.reverse().splice(i, 1, {
-        pagina: page,
-        status: 'completed',
-        tarea: doc.data().arrPages.pagesArr.tareas.reverse()[i].tarea,
-        usuario: doc.data().arrPages.pagesArr.tareas.reverse()[i].usuario,
-      });
-
-      const arrPages = {
-        pagesArr: {
-          pagina: page,
-          avisos: arr,
-          tareas: arrTareas.reverse(),
-        },
-      };
-      return new Promise((resolve, reject) => {
-        docPagesRef
-          .doc('pages' + page.replace(/ /g, "") + 'azlo')
-          .set({
-            arrPages,
-          })
-          .then(function (docRef) {
-            resolve(arrPages);
-
-            const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 1500,
-              timerProgressBar: true,
-              didOpen: (toast) => {
-                toast.addEventListener('mouseenter', Swal.stopTimer);
-                toast.addEventListener('mouseleave', Swal.resumeTimer);
-              },
-            });
-            document.querySelector('#avisoText').value = '';
-            Toast.fire({
-              icon: 'success',
-              title: 'Tarea actualizada',
-            });
-          })
-          .catch(function (error) {
-            reject(error);
+      firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+          const { displayName, email, photoURL } = user;
+          console.log(displayName);
+          const arr = doc.data().arrPages.pagesArr.avisos;
+          const arrTareas = doc.data().arrPages.pagesArr.tareas;
+          const arrTareas2 = doc.data().arrPages.pagesArr.tareas;
+          arrTareas.reverse().splice(i, 1, {
+            pagina: page,
+            status: 'completed',
+            tarea: doc.data().arrPages.pagesArr.tareas.reverse()[i].tarea,
+            usuario: doc.data().arrPages.pagesArr.tareas.reverse()[i].usuario,
+            name: displayName,
           });
+
+          const arrPages = {
+            pagesArr: {
+              pagina: page,
+              avisos: arr,
+              tareas: arrTareas.reverse(),
+            },
+          };
+          return new Promise((resolve, reject) => {
+            docPagesRef
+              .doc('pages' + page.replace(/ /g, "") + 'azlo')
+              .set({
+                arrPages,
+              })
+              .then(function (docRef) {
+                resolve(arrPages);
+
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  showConfirmButton: false,
+                  timer: 1500,
+                  timerProgressBar: true,
+                  didOpen: (toast) => {
+                    toast.addEventListener('mouseenter', Swal.stopTimer);
+                    toast.addEventListener('mouseleave', Swal.resumeTimer);
+                  },
+                });
+                document.querySelector('#avisoText').value = '';
+                Toast.fire({
+                  icon: 'success',
+                  title: 'Tarea actualizada',
+                });
+              })
+              .catch(function (error) {
+                reject(error);
+              });
+          });
+
+        } else {
+
+        }
       });
     })
     .catch((error) => {

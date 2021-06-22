@@ -815,10 +815,10 @@ body {
   padding: 8px 0;
 }
 .table td:last-of-type {
-  width: 100px;
+  width: auto;
 }
 .table td:nth-child(n + 5) {
-  padding: 0 10px;
+  padding: 0 0px;
 }
 .table td:nth-last-of-type(2) svg {
   width: 16px;
