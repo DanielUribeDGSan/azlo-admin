@@ -1065,6 +1065,11 @@ table td,
   padding: 4px 13px;
   margin: 5px 0px 14px 0px;
 }
+.table {
+  width: 100% !important;
+  margin-bottom: 1rem;
+  color: #ffffff !important;
+}
 /* Utilidades */
 
 .border-rad-10 {
